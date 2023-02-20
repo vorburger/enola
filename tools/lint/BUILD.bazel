@@ -1,0 +1,13 @@
+# https://github.com/andyscott/misc_rules
+# (Alternative considered: https://github.com/aignas/rules_shellcheck/)
+
+load("@misc_rules//rules/shellcheck:shellcheck.bzl", "shellcheck_test")
+
+shellcheck_test(
+    name = "shellcheck",
+    srcs = [
+        "myscript.sh",
+    ],
+)
+
+# TODO https://github.com/andyscott/misc_rules/issues/15

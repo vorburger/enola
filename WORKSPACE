@@ -52,3 +52,52 @@ load("@maven//:compat.bzl", "compat_repositories")
 compat_repositories()
 
 grpc_java_repositories()
+
+# https://github.com/tweag/rules_nixpkgs
+http_archive(
+    name = "io_tweag_rules_nixpkgs",
+    strip_prefix = "rules_nixpkgs-691582fd6712502b38e7ef6a488203edc79143b8",
+    urls = ["https://github.com/tweag/rules_nixpkgs/archive/691582fd6712502b38e7ef6a488203edc79143b8.tar.gz"],
+)
+
+load("@io_tweag_rules_nixpkgs//nixpkgs:repositories.bzl", "rules_nixpkgs_dependencies")
+
+rules_nixpkgs_dependencies()
+
+# TODO "nixpkgs_cc_configure" ?
+load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_git_repository", "nixpkgs_package")
+
+nixpkgs_git_repository(
+    name = "nixpkgs",
+    remote = "https://github.com/NixOS/nixpkgs",
+    revision = "22.11",  # Any tag or commit hash
+    sha256 = "TODO",
+)
+
+# TODO How to use Nix hello in a https://bazel.build/reference/be/shell ?
+nixpkgs_package(
+    name = "hello",
+    # repository = "@nixpkgs",
+    repositories = {"nixpkgs": "@nixpkgs//:default.nix"},
+)
+
+nixpkgs_package(
+    name = "shellcheck",
+    # repository = "@nixpkgs",
+    repositories = {"nixpkgs": "@nixpkgs//:default.nix"},
+)
+
+# https://github.com/andyscott/misc_rules
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "misc_rules",
+    commit = "0bc662f896bf0e3841a13864482b6e4f4e6eca90",
+    remote = "git://github.com/andyscott/misc_rules",
+)
+
+register_toolchains(
+    "@misc_rules//toolchains/shellcheck:shellcheck_from_nixpkgs",
+)
+
+# TODO https://github.com/andyscott/misc_rules/issues/15
