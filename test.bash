@@ -33,7 +33,8 @@ fi
 # Check if https://get-coursier.io is available (we need it for the google-java-formatter from the dustinsand/pre-commit-jvm pre-commit)
 if ! [ -e "./.cache/bin/coursier" ]; then
     mkdir -p ./.cache/bin/
-    curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > ./.cache/bin/coursier
+    curl -fLo ./.cache/bin/coursier.gz "https://github.com/coursier/coursier/releases/download/v2.0.16-200-ge888c6dea/cs-x86_64-pc-linux.gz"
+    gunip ./.cache/bin/coursier.gz
     chmod +x ./.cache/bin/coursier
 fi
 PATH=$PWD/.cache/bin/:$PATH
