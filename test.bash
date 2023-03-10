@@ -29,6 +29,15 @@ else
   source ./.venv/bin/activate
 fi
 
+# TODO Revert the commit which introduced this (git blame) again when google-java-formatter is called by Bazel; see https://github.com/google/google-java-format/issues/917.
+# Check if https://get-coursier.io is available (we need it for the google-java-formatter from the dustinsand/pre-commit-jvm pre-commit)
+if ! [ -e "./.cache/bin/coursier" ]; then
+    mkdir -p ./.cache/bin/
+    curl -fL "https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz" | gzip -d > ./.cache/bin/coursier
+    chmod +x ./.cache/bin/coursier
+fi
+PATH=$PWD/.cache/bin/:$PATH
+
 pre-commit run
 
 # TODO mdlint *.md (ideally as Bazel sh_test, like shellcheck)
