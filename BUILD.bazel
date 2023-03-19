@@ -35,3 +35,11 @@ shellcheck_test(
     ),
     tags = ["lint"],
 )
+
+sh_test(
+    name = "mkdocs_build_test",
+    size = "small",
+    srcs = ["build.bash"],
+    data = ["requirements.txt", "mkdocs.yaml"] + glob(["docs/**"]),
+    deps = [],
+)
