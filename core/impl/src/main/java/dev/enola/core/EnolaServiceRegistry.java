@@ -18,6 +18,7 @@
 package dev.enola.core;
 
 import dev.enola.core.iri.URITemplateMatcherChain;
+import dev.enola.core.meta.proto.Type;
 import dev.enola.core.proto.GetThingRequest;
 import dev.enola.core.proto.GetThingResponse;
 import dev.enola.core.proto.ID;
@@ -27,6 +28,10 @@ import dev.enola.core.proto.ListEntitiesResponse;
 class EnolaServiceRegistry implements EnolaService {
 
     private final URITemplateMatcherChain<EnolaService> matcher = new URITemplateMatcherChain<>();
+
+    public void register(Type type, EnolaService service) {
+        matcher.add(type.getUri(), service);
+    }
 
     public synchronized void register(ID ekid, EnolaService service) {
         // URI for get():
