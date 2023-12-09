@@ -11,3 +11,6 @@ derive_targets_from_directories: true
 # https://github.com/salesforce/bazel-eclipse/issues/475
 # https://github.com/salesforce/bazel-eclipse/blob/main/docs/common/projectviews.md#project-per-package
 target_provisioning_strategy: project-per-package
+
+# https://github.com/salesforce/bazel-eclipse/issues/477
+bazel_binary: bazelisk

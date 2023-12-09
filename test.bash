@@ -19,9 +19,15 @@ set -euo pipefail
 
 # Same also in the ./enola script:
 if ! [ -x "$(command -v bazelisk)" ]; then
-    echo "bazelisk is not installed, please run e.g. 'go install github.com/bazelbuild/bazelisk@latest' "
+  if [ -x "$(command -v go)" ]; then
+    go install github.com/bazelbuild/bazelisk@latest
+    go install github.com/bazelbuild/buildtools/buildifier@latest
+    go install github.com/bazelbuild/buildtools/buildozer@latest
+  else
+    echo "bazelisk is not installed, please either install Go https://go.dev/doc/install and then run e.g. 'go install github.com/bazelbuild/bazelisk@latest' "
     echo "or an equivalent from https://github.com/bazelbuild/bazelisk#installation or see docs/dev/setup.md"
     exit 255
+  fi
 fi
 
 # Check if https://pre-commit.com is available (and try to install it not)
