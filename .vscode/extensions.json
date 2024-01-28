@@ -10,7 +10,11 @@
     "plex.vscode-protolint",
     "zxh404.vscode-proto3",
     "thejustinwalsh.textproto-grammer",
-    "seaube.clangformat"
+    "seaube.clangformat",
+    "html-validate.vscode-html-validate",
+    "htmlhint.vscode-htmlhint",
+    "ecmel.vscode-html-css",
+    "zignd.html-css-class-completion"
   ],
   "unwantedRecommendations": ["kshetline.ligatures-limited"]
 }

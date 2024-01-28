@@ -25,7 +25,7 @@ java_library(
         "//connectors:__subpackages__",  #  ONLY for test, NEVER for non-test Demo (or any other) Connector binary!
         # TODO Move package dev.enola.core.grpc from impl to lib_java, and remove this:
         "//web/rest:__pkg__",
-        "//web/ui-soy:__pkg__",
+        "//web/ui:__pkg__",
     ],
     runtime_deps = [
         "@maven//:io_grpc_grpc_netty",
