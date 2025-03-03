@@ -18,3 +18,11 @@ maven:
   # https://github.com/VirtusLab/bazel-steward/issues/401
   # https://github.com/enola-dev/enola/issues/254
   repository-name: enola_maven
+
+update-rules:
+  - kinds: maven
+    dependencies: org.apache.maven.resolver:maven-resolver-util
+    enabled: true
+  - kinds: maven
+    enabled: false
+    dependencies: "*:*"
